@@ -1,29 +1,24 @@
-sentences = []
+def is_question(sentence):
+    question_words = ('What', 'Where', 'When', 'How', 'Why', 'Do')
+    return sentence.startswith(question_words)
 
-def is_question(word):
-    question_words = ['what', 'where', 'when', 'how', 'why', 'do']
-    if word.lower() in question_words:
-        return True
+def sentence_maker(sentence):
+    capitalized_sentence = sentence.capitalize()
 
-def add_sentence(sentence):
-    word_list = sentence.split()
-    if is_question(word_list[0]):
-        word_list.append('?')
+    if capitalized_sentence.endswith(('?','.')):
+        return capitalized_sentence
     else:
-        word_list.append('.')
-    word_list[0] = word_list[0].title()
-
-    correct_sentence = ' '.join([str(item) for item in word_list])
-
-    print(correct_sentence)
-
-    sentences.append(correct_sentence)
-
+        if is_question(capitalized_sentence):
+            return capitalized_sentence + '?'
+        else:
+            return capitalized_sentence + '.'
+    
+sentences = []
 while True:
     new_sentence = input('Say something: ')
     if new_sentence == '\end':
-        print(' '.join([str(item) for item in sentences]))
+        print(' '.join(sentences))
         break
     else:
-        add_sentence(new_sentence)
+        sentences.append(sentence_maker(new_sentence))
         continue
