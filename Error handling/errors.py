@@ -19,6 +19,8 @@ def divide(a,b):
         return a/b
     except ZeroDivisionError:
         return 'You are dividing by zero'
+    # except OtherErrorType:
+    # return 'Another erro'
 
 print(divide(1,2))
 print(divide(1,0))
